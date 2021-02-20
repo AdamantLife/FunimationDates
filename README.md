@@ -10,4 +10,4 @@ This extension is not currently available in any Extension/Add-on Store and ther
 If you do not know how to install an unpacked extension, the quickest solution is to do a web search for the steps needed for your specific browser. Generally, on the extensions/add-on page there will be a checkbox/toggle to allow Developer Mode (or a similar setting) at which point a button will appear with a label similar to "Load an unpacked extension".
 
 ## Functionality
-When the homepage loads episodes it makes a request to Funimation's private API for episode information and stores it. The dates added by this extension are taken directly from that data: this extension makes no API calls of any kind and does no validation or manipulation of the dates aside from formatting them using Date.toLocaleString.
+When the homepage loads episodes it makes a request to Funimation's private API for episode information and stores the response. The dates added by this extension are taken directly from that data: this extension makes no API calls of any kind and does no validation or manipulation of the dates aside from formatting them using Date.toLocaleString.
