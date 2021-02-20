@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "FunimationDates",
+  "version": "1.0",
+  "permissions": [],
+  "background": {
+    "scripts": [ ] // Background Scripts
+    //"persistent": true
+  },
+  "content_scripts":[
+    {
+      "matches":["*://*.funimation.com/shows/*/","*://*.funimation.com/shows/*/?*"],
+      "js":["dater.js"],
+      "run_at":"document_end"
+    }
+  ]
+  }
