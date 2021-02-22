@@ -5,7 +5,7 @@ FunimationDates is a browser extension which adds Aired Date/Date Added informat
 <img src="Example2.png"/>
 
 ## Availability and Usage
-This extension is not currently available in any Extension/Add-on Store and therefore has to be loaded as an unpacked add-on. You should never install any extension that you do not trust; be sure to review the extension (it's extremely basic) and understand what it does before you choose to install. This section will be updated with distribution links once this extension is available for installation through official channels.
+This extension is not currently available in any Extension/Add-on Store and therefore has to be loaded as an unpacked add-on. You should never install any extension that you do not trust; be sure to review the extension (it's relatively basic) and understand what it does before you choose to install. This section will be updated with distribution links once this extension is available for installation through official channels.
 
 If you do not know how to install an unpacked extension, the quickest solution is to do a web search for the steps needed for your specific browser. Generally, on the extensions/add-on page there will be a checkbox/toggle to allow Developer Mode (or a similar setting) at which point a button will appear with a label similar to "Load an unpacked extension".
 
