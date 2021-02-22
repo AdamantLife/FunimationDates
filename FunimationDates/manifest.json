@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "FunimationDates",
-  "version": "1.0",
+  "version": "1.1",
   "permissions": [],
   "background": {
     "scripts": [ ] // Background Scripts
@@ -10,7 +10,7 @@
   "content_scripts":[
     {
       "matches":["*://*.funimation.com/shows/*/","*://*.funimation.com/shows/*/?*"],
-      "js":["dater.js"],
+      "js":["dater_utils.js","dater_episode.js", "dater_episodelist.js","dater.js"],
       "run_at":"document_end"
     }
   ]
