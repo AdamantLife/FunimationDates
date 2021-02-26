@@ -6,7 +6,10 @@ class EpisodeDate{
     checkLoadDate(){
         let data;
         try {
-            data = retrieveWindowVariables({fp:"window[0].fp"}).fp;
+            // Data some time gets stored in window[1] instead of window[0]
+            // The reason is unclear at the mmoment
+            data = retrieveWindowVariables({fp:"window[0].fp","fp2":"window[1].fp"});
+            data = data.fp || data.fp2;
             if(data.contentSeries2 === undefined) throw new Error("Pass")
         } catch (error) {
             return setTimeout(this.checkLoadDate.bind(this),500);
