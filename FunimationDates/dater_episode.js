@@ -1,6 +1,6 @@
 class EpisodeDate{
     constructor(){
-        setTimeout(this.checkLoadDate.bind(this),500);
+        setTimeout(this.checkLoadDate.bind(this),2000);
     }
 
     checkLoadDate(){
@@ -12,7 +12,7 @@ class EpisodeDate{
             data = data.fp || data.fp2;
             if(data.contentSeries2 === undefined) throw new Error("Pass")
         } catch (error) {
-            return setTimeout(this.checkLoadDate.bind(this),500);
+            return setTimeout(this.checkLoadDate.bind(this),2000);
         }
         this.data = data;
         this.loadDate();
@@ -39,3 +39,9 @@ class EpisodeDate{
         ele.insertAdjacentHTML('afterend', `<span>&nbsp;&nbsp|&nbsp;&nbsp;</span><span>${date.toLocaleString("en-US")}</span>`);
     }
 }
+
+var HANDLER;
+(function(){
+    HANDLER = new EpisodeDate();
+    console.log("Dater Episode Running");
+})();
