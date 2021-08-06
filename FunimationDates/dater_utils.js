@@ -7,7 +7,7 @@ function retrieveWindowVariables(variables) {
 
     var scriptContent = "";
     for(let [key,value] of Object.entries(variables)){
-        scriptContent+=`if (typeof ${value} !== 'undefined') document.body.setAttribute('tmp_${key}', JSON.stringify(${value}));`;
+        scriptContent+=`try{if (typeof ${value} !== 'undefined') document.body.setAttribute('tmp_${key}', JSON.stringify(${value}));}catch(e){}`;
     }
 
     var script = document.createElement('script');

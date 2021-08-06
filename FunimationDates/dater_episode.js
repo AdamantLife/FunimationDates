@@ -4,17 +4,19 @@ class EpisodeDate{
     }
 
     checkLoadDate(){
-        let data;
+        let data, episode;
         try {
             // Data some time gets stored in window[1] instead of window[0]
             // The reason is unclear at the mmoment
-            data = retrieveWindowVariables({fp:"window[0].fp","fp2":"window[1].fp"});
+            data = retrieveWindowVariables({fp:"window[0].fp.contentSeries2","fp2":"window[1].fp.contentSeries2",episode:"window[0].fp.episode","episode2":"window[1].fp.episode"});
+            episode = data.episode || data.episode2;
             data = data.fp || data.fp2;
-            if(data.contentSeries2 === undefined) throw new Error("Pass")
+            if(!data || data === undefined) throw new Error("Pass")
         } catch (error) {
             return setTimeout(this.checkLoadDate.bind(this),2000);
         }
         this.data = data;
+        this.data.episode = episode;
         this.loadDate();
     }
 
@@ -24,7 +26,7 @@ class EpisodeDate{
         // Due to Dubs, einfo.mostRecentSvod will not display the same
         // info as on the homepage; we're prioritizing consistency
         // and therefore using mostRecentSvodJpnUsStartTimestamp
-        for(let einfo of this.data.contentSeries2.parsedItems){
+        for(let einfo of this.data.parsedItems){
             if(einfo.itemId == key){
                 starttime = einfo.mostRecentSvodJpnUsStartTimestamp;
                 break;
