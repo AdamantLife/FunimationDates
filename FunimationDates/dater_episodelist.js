@@ -126,7 +126,9 @@ class EpisodeListDates{
             // Season data is added to showDetail on an as-needed basis
             if(!showDetails.seasons[seasonid]){ continue;}
             for(let episode of showDetails.seasons[seasonid]){
-                output[episode.name] = episode;
+                for(let name of Object.values(episode.name)){
+                    output[name] = episode;
+                }
             }
         }
         return output;
@@ -160,19 +162,47 @@ class EpisodeListDates{
                 }
             }
             if(!episode_data){
+                console.log("!!!!", episode_lookup, episode);
                 throw new Error("Could not find href");
             }
             // In the new site, divs seem to be reused which means that the previous release date needs to be removed
             let previous = episode.datadiv.querySelector("span.releasedate")
             if(previous) { previous.remove(); }
-            // releaseDate is not completely accurate; we will find the earliest video in the videoList and use that video's startDate
-            let date = 99999999999999
-            for( let video of episode_data.videoList){
-                for (let right of video.videoRights){
-                    if(right.startDate < date) date = right.startDate
+            // Try to determine locale release dt
+            // If we can't find earliest
+            let region;
+            try{
+                // e.g.- w.n.lang = "en-US" => returns "US"
+                region = /-([A-Z]{2})$/.exec(window.navigator.language)[1];
+            }catch(e){}
+
+            let date;
+            if(region){
+                try{
+                    vids = episode_data.videoAvailability.all[region].SVOD;
+                    // Format ex.: "simulcast":{start: date, end: date}
+                    for(let videotype of Object.values(vids)){
+                        let newDate = new Date(videotype.start);
+                        if(date){
+                            if(newDate < date) date = newDate;
+                        }else{
+                            date = newDate;
+                        }
+                    }
+                }catch(e){}
+            }
+            if(!date){
+                for( let region of Object.values(episode_data.videoAvailability.all)){
+                    for (let videotype of Object.values(region.SVOD)){
+                        let newDate = new Date(videotype.start);
+                        if (date){
+                            if(newDate < date) date = newDate
+                        }else{
+                            date = newDate;
+                        }
+                    }
                 }
             }
-            date = new Date(date);
             episode.datadiv.insertAdjacentHTML("beforeend", `<span class="releasedate"> | ${date.toLocaleString("en-US", {timeZone:Intl.DateTimeFormat().resolvedOptions().timeZone})}</span>`);
         }    
     }
