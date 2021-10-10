@@ -1,11 +1,10 @@
 {
   "manifest_version": 2,
   "name": "FunimationDates",
-  "version": "2.0",
+  "version": "2.1",
   "permissions": [],
   "background": {
-    "scripts": [ ] // Background Scripts
-    //"persistent": true
+    "scripts": [ ]
   },
   "content_scripts":[
     {
@@ -16,6 +15,11 @@
     {
       "matches":["*://*.funimation.com/*/shows/*/","*://*.funimation.com/*/shows/*/?*"],
       "js":["dater_utils.js","dater_episode.js"],
+      "run_at":"document_end"
+    },
+    {
+      "matches":["*://*.funimation.com/new-releases/*"],
+      "js":["dater_utils.js", "dater_releases.js"],
       "run_at":"document_end"
     }
   ]
